@@ -1,0 +1,19 @@
+page-home {
+    .cart-button {
+        float: right;
+
+        ion-icon {
+            position: relative;
+            top: 10px;
+        }
+    }
+
+    ion-navbar {
+        text-align: center;
+
+        img {
+            height: 30px;
+        }
+    }
+
+}

@@ -1,0 +1,21 @@
+<ion-menu [content]="mycontent">
+    <ion-list>
+        <button ion-item (click)="openPage(ordersPage)" menuClose>
+        ORDERS
+        </button>
+        <button ion-item (click)="openPage(precheckoutPage)" menuClose>
+        CHECKOUT
+        </button>
+        <button ion-item (click)="openPage(contactusPage)" menuClose>
+        CONTACT US
+        </button>
+        <button ion-item (click)="openPage(usersettingsPage)" menuClose>
+        SETTINGS
+        </button>
+        <button ion-item (click)="signOut()" menuClose>
+        SIGN OUT
+        </button>
+    </ion-list>
+</ion-menu>
+
+<ion-nav #mycontent [root]="rootPage"></ion-nav>

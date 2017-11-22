@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-navbar>
+      <button ion-button menuToggle icon-only>
+        <ion-icon name='menu'></ion-icon>
+      </button>
+      <img src="assets/logo-small-grey.png"/>
+      <div [navPush]="precheckout" class="cart-button">
+        <ion-icon name='cart'></ion-icon>
+        <ion-badge item-end>{{cartNumber}}</ion-badge>    
+      </div>          
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <postcard></postcard>
+</ion-content>
+
