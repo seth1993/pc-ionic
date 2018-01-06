@@ -7,6 +7,8 @@ import { OrdersPage } from '../pages/orders/orders';
 import { PrecheckoutPage } from '../pages/precheckout/precheckout';
 import { ContactusPage } from '../pages/contactus/contactus';
 import { UsersettingsPage } from '../pages/usersettings/usersettings';
+import { AngularFireObject, AngularFireDatabase } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   templateUrl: 'app.html'
@@ -18,12 +20,16 @@ export class MyApp {
   private contactusPage;
   private precheckoutPage;
   private usersettingsPage;
+  itemRef: AngularFireObject<any>;
+  item: Observable<any>;
+  userId: string;
 
   constructor(
     platform: Platform, 
     statusBar: StatusBar, 
     splashScreen: SplashScreen,
     public auth: AuthProvider,
+    db: AngularFireDatabase
   ) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -32,8 +38,11 @@ export class MyApp {
       splashScreen.hide();
 
       auth.user.first().subscribe((user) => {
+        console.log('Checking if logged in');
         if (user === null) {
           this.rootPage = 'auth-signin';
+        } else {
+          this.userId = user.uid;
         }
       });
     });
@@ -42,6 +51,9 @@ export class MyApp {
     this.contactusPage = ContactusPage;
     this.precheckoutPage = PrecheckoutPage;
     this.usersettingsPage = UsersettingsPage;
+
+    this.itemRef = db.object('users/CiHWISeHoCMHjA0qFJYK6Ihp4pu1');
+    this.item = this.itemRef.valueChanges();
   }
 
   openPage(page) {
@@ -52,5 +64,9 @@ export class MyApp {
   signOut() {
     this.auth.logout();
     this.rootPage = 'auth-signin';
+  }
+
+  save() {
+    this.itemRef.set({item: 'seth'}).then(_ => console.log('set!'));
   }
 }

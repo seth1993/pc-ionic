@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, FirebaseListObservable, 
-  FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList, 
+  AngularFireObject } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
@@ -23,11 +23,11 @@ export class DataProvider {
     return this.afDB.object(path).update(data);
   }
 
-  list(path: string, query: any = {}): FirebaseListObservable<any> {
-    return this.afDB.list(path, { query });
+  list(path: string): AngularFireList<any> {
+    return this.afDB.list(path);
   }
 
-  object(path: string): FirebaseObjectObservable<any> {
+  object(path: string): AngularFireObject<any> {
     return this.afDB.object(path);
   }
 

@@ -2,10 +2,15 @@
 <ion-icon [ngStyle]="{'margin-left': width/2 + 15 + 'px'}" class="rotate spin-icon" name="md-redo"></ion-icon>     
 <div class="spacer"></div>
 <ion-card (click)="addPicture()" [ngStyle]="{'width': width + 'px'}" class="front-up visible">
-    <img src="assets/image.png" alt="Add Image">
-    <p>ADD IMAGE</p>
+    <div>
+        <img [src]="image" *ngIf="image">
+    </div>
 </ion-card>
 <ion-card class="card back invisible"></ion-card>
+<div>
+    <input type="file" (change)="selectFile($event)">
+    <button ion-button (click)="addPicture()">Upload Image</button>
+</div>
 <div class="pick-side">
     <span class="active">FRONT</span>
     <span>BACK</span>

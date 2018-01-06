@@ -1,7 +1,12 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, NgZone } from '@angular/core';
 import {ElementRef,Renderer2} from '@angular/core';
 import { NgStyle } from '@angular/common';
 import { PhotoLibrary } from '@ionic-native/photo-library';
+import { FirebaseApp } from 'angularfire2';
+import * as firebase from 'firebase';
+
+//import { File } from '@ionic-native/file';
+
 /**
  * Generated class for the PostcardComponent component.
  *
@@ -20,8 +25,11 @@ export class PostcardComponent {
   text: string;
   width: number;
   cart: number;
+  image: any;
+  file: any;
+  storageRef = firebase.storage().ref();
 
-  constructor(private rd: Renderer2, private photoLibrary: PhotoLibrary) {
+  constructor(private rd: Renderer2, private photoLibrary: PhotoLibrary, public zone:NgZone/*, private file: File*/) {
     console.log('Hello PostcardComponent Component');
     this.text = 'Hello World';
   }
@@ -30,7 +38,7 @@ export class PostcardComponent {
     console.log(this.rd);
     var card: any = document.getElementsByClassName("visible")[0];
     console.log("K ", card.offsetHeight);
-    this.width = (2.0/3.0)*card.offsetHeight;
+    this.width = (3.0/2.0)*card.offsetHeight;
     this.cart = 1;
   }
 
@@ -46,29 +54,25 @@ export class PostcardComponent {
     
   }
 
-  addPicture() {
-    console.log("Hello ah yeah");
-    this.photoLibrary.requestAuthorization().then(() => {
-      this.photoLibrary.getLibrary().subscribe({
-        next: library => {
-          library.forEach(function(libraryItem) {
-            console.log(libraryItem.id);          // ID of the photo
-            console.log(libraryItem.photoURL);    // Cross-platform access to photo
-            console.log(libraryItem.thumbnailURL);// Cross-platform access to thumbnail
-            console.log(libraryItem.fileName);
-            console.log(libraryItem.width);
-            console.log(libraryItem.height);
-            console.log(libraryItem.creationDate);
-            console.log(libraryItem.latitude);
-            console.log(libraryItem.longitude);
-            console.log(libraryItem.albumIds);    // array of ids of appropriate AlbumItem, only of includeAlbumsData was used
-          });
-        },
-        error: err => { console.log('could not get photos'); },
-        complete: () => { console.log('done getting photos'); }
-      });
-    })
-    .catch(err => console.log('permissions weren\'t granted'));
+  selectFile(e) {
+    this.file = e.target.files[0];
+    this.readPhoto(this.file);
   }
-  
+
+  readPhoto(file) {
+    let reader = new FileReader();
+    reader.onload = (e) => {
+      this.zone.run(() => {
+        let path:any = e.target;
+        this.image = path.result;
+      });
+    }
+    reader.readAsDataURL(file);
+  }
+
+  addPicture(){
+    this.storageRef.child("images/" + this.file.name).put(this.file).then((snapshot) =>{
+      alert("Upload success");
+    });
+  }
 }

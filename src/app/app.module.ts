@@ -6,6 +6,7 @@ import { MyApp } from './app.component';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Facebook } from '@ionic-native/facebook';
+import { File } from '@ionic-native/file';
 
 import { IonicStorageModule } from '@ionic/storage';
 import { HttpModule } from '@angular/http';
@@ -66,7 +67,7 @@ const firebaseConfig = {
     AuthProvider,
     DataProvider,
     FunctionsProvider,
-    FunctionsProvider
+    File
   ]
 })
 export class AppModule {
