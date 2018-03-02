@@ -24,7 +24,6 @@ import { PrecheckoutPage } from '../pages/precheckout/precheckout';
 import { ContactusPage } from '../pages/contactus/contactus';
 import { UsersettingsPage } from '../pages/usersettings/usersettings';
 
-
 const firebaseConfig = {
   apiKey: 'AIzaSyBLb1hdW2yKUNuQNLEgsPOYxV6MwMROhyc',
   authDomain: 'snap-post-card.firebaseapp.com',

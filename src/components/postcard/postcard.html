@@ -1,5 +1,4 @@
-<!-- Generated template for the PostcardComponent component -->
-<ion-icon [ngStyle]="{'margin-left': width/2 + 15 + 'px'}" class="rotate spin-icon" name="md-redo"></ion-icon>     
+<!-- Generated template for the PostcardComponent component -->   
 <div class="spacer"></div>
 <ion-card (click)="addPicture()" [ngStyle]="{'width': width + 'px'}" class="front-up visible">
     <div>
@@ -12,8 +11,8 @@
     <button ion-button (click)="addPicture()">Upload Image</button>
 </div>
 <div class="pick-side">
-    <span class="active">FRONT</span>
-    <span>BACK</span>
+    <span (click)="switchSides('back')" [ngClass]="{'active': !backSide }">FRONT</span>
+    <span (click)="switchSides('front')" [ngClass]="{'active': backSide }">BACK</span>
 </div>
 <div class="add-to-cart">
     <div (click)="onCart = !onCart" [hidden]="onCart" class="initial">

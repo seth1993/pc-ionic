@@ -16,4 +16,108 @@ page-home {
         }
     }
 
+    text-align: center;
+
+    .invisible {
+        display: none;
+        max-width: 0;
+    }
+
+    .visible {
+        display: inline-block;
+        max-width: none;
+    }
+
+    .flip {
+        -ms-transform: rotate(180deg); /* IE 9 */
+        -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+        transform: rotate(180deg);
+        display: block;
+    }
+
+    .rotate {
+        display: inline-block;
+        padding: 0 0 30px 30px ;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        &::before {
+            -ms-transform: rotate(45deg); /* IE 9 */
+            -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
+            transform: rotate(45deg);
+        }
+    }
+
+    .spin-icon {
+        font-size: 3rem;
+    }
+
+    .front-up {
+        height: 60%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+
+        img {
+            height: 100%;
+        }
+
+        p {
+            margin-top: 25px;
+        }
+    }
+
+    .paper {
+        width: 100%;
+        height: 100%;
+    }
+
+    .spacer {
+        height: 25px;
+        width: 100%;
+    }
+
+    .active {
+        font-weight: bold;
+        border-bottom: solid 1px;
+    }
+
+    .pick-side {
+        padding-top: 1rem;
+
+        span {
+            padding: 1rem 0;
+            margin: 0 1rem;
+            display: inline-block;
+        }
+    }
+
+    .add-to-cart {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+
+        .initial {
+            height: 100%;
+        }
+
+        .later {
+            button {
+                width: 217px;
+            }
+        }
+    }
+
+    .center {
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+
+    #dropZone {
+        border: none;
+        height: -webkit-fill-available;
+    }
 }

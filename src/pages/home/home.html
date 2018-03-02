@@ -12,6 +12,50 @@
 </ion-header>
 
 <ion-content padding>
-  <postcard></postcard>
+    <div class="spacer"></div>
+    <ion-card (click)="addPicture()" [ngStyle]="{'width': width + 'px'}" class="front-up visible">
+        <div class="frontside" [ngClass]="{'invisible': backSide }">
+            <div>
+                <!-- <img id="postcardImage" [src]="image" *ngIf="image"> -->
+                <img id="postcardImage" src="" width="100px" height="100px"/>
+            </div>
+            <div class="center">
+                <file-drop headertext="Drop files here" (onFileDrop)="dropped($event)" 
+                (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+                    <!-- <span>optional content (don't set headertext then)</span> -->
+                </file-drop>
+            </div>
+        </div>
+        <div class="backside" [ngClass]="{'invisible': !backSide }">
+            <p>This is the backside</p>
+            <div class="divider-line"></div>
+        </div>
+    </ion-card>
+    <ion-card class="card back invisible"></ion-card>
+    <div>
+        <input type="file" (change)="selectFile($event)">
+        <button ion-button (click)="addPicture()">Upload Image</button>
+    </div>
+    <div class="pick-side">
+        <span (click)="switchSides('back')" [ngClass]="{'active': !backSide }">FRONT</span>
+        <span (click)="switchSides('front')" [ngClass]="{'active': backSide }">BACK</span>
+    </div>
+    <div class="add-to-cart">
+        <div (click)="onCart = !onCart" [hidden]="onCart" class="initial">
+            <button outline ion-button icon-end>
+                ADD TO CART
+                <ion-icon name="cart"></ion-icon>            
+            </button>
+        </div>
+        <div (click)="onCart = !onCart" [hidden]="!onCart" class="later">
+            <button class="first-column" ion-button>
+                <p>START A NEW CARD</p>
+            </button>
+            <button class="second-column" ion-button icon-right>
+                <p>CONTINUE TO CHECKOUT</p>
+                <ion-icon name="arrow-forward"></ion-icon>                
+            </button>
+        </div>
+    </div>
 </ion-content>
 

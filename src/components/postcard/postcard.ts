@@ -28,10 +28,12 @@ export class PostcardComponent {
   image: any;
   file: any;
   storageRef = firebase.storage().ref();
+  backSide: boolean;
 
   constructor(private rd: Renderer2, private photoLibrary: PhotoLibrary, public zone:NgZone/*, private file: File*/) {
     console.log('Hello PostcardComponent Component');
     this.text = 'Hello World';
+    this.backSide = false;
   }
 
   ngAfterViewInit() {
@@ -74,5 +76,11 @@ export class PostcardComponent {
     this.storageRef.child("images/" + this.file.name).put(this.file).then((snapshot) =>{
       alert("Upload success");
     });
+  }
+
+  switchSides(){
+    console.log("Switch sides");
+
+    this.backSide = !this.backSide;
   }
 }
